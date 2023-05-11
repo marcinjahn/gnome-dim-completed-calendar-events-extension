@@ -1,0 +1,8 @@
+{
+  "name": "Mark Past Calendar Events",
+  "description": "A Gnome Shell extension that allows you to cross out events that already happened in the past.",
+  "uuid": "mark-past-calendar-events@marcinjahn.com",
+  "shell-version": ["44"],
+  "url": "https://github.com/marcinjahn/gnome-mark-past-calendar-events-extension",
+  "version": 4
+}
