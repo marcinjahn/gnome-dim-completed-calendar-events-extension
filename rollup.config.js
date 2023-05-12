@@ -10,9 +10,7 @@ const buildPath = "dist";
 const globals = {
   "@gi-types/gtk4": "imports.gi.Gtk",
   "@gi-types/adw1": "imports.gi.Adw",
-  "@gi-types/gvc1": "imports.gi.Gvc",
   "@gi-types/gio2": "imports.gi.Gio",
-  "@gi-types/glib2": "imports.gi.GLib",
 };
 
 const external = [...Object.keys(globals)];

@@ -1,8 +1,8 @@
 {
-  "name": "Mark Past Calendar Events",
-  "description": "A Gnome Shell extension that allows you to cross out events that already happened in the past.",
-  "uuid": "mark-past-calendar-events@marcinjahn.com",
+  "name": "Dim Completed Calendar Events",
+  "description": "Dim completed events in the top panel menu to easily distinguis between upcoming and past events. You cal also highlight events that are ongoing.",
+  "uuid": "dim-completed-calendar-events@marcinjahn.com",
   "shell-version": ["44"],
-  "url": "https://github.com/marcinjahn/gnome-mark-past-calendar-events-extension",
+  "url": "https://github.com/marcinjahn/gnome-dim-completed-calendar-events-extension",
   "version": 1
 }

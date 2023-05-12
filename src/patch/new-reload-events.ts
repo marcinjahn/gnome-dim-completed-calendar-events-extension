@@ -24,8 +24,8 @@ export function buildPatchedReloadEventsFunction(
       const summaryLabel = new imports.gi.St.Label({
         text: event.summary,
         style_class: "event-summary",
-        style: isPastEvent(event, patchConfiguration.shouldStylePastEvents)
-          ? getPastEventStyle()
+        style: isCompletedEvent(event, patchConfiguration.shouldStylePastEvents)
+          ? getCompletedEventStyle()
           : isOngoingEvent(event, patchConfiguration.shouldStyleOngoingEvents)
           ? getOngoingEventStyle()
           : null,
@@ -56,7 +56,7 @@ export function buildPatchedReloadEventsFunction(
   };
 }
 
-function isPastEvent(event: Event, shouldStylePastDays: boolean) {
+function isCompletedEvent(event: Event, shouldStylePastDays: boolean) {
   const isFinished = event.end < new Date();
   log(Object.keys(event));
   if (shouldStylePastDays) {
@@ -84,7 +84,7 @@ function isEventAllDay(event: Event) {
   return event.date === dayStart && event.end === dayEnd;
 }
 
-function getPastEventStyle() {
+function getCompletedEventStyle() {
   return "color: #9a9996"; // same grey as event time
 }
 

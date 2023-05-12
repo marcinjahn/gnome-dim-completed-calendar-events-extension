@@ -2,7 +2,7 @@ import { Settings } from "@gi-types/gio2";
 
 const ExtensionUtils = imports.misc.extensionUtils;
 
-const SettingsPath = "org.gnome.shell.extensions.mark-past-calendar-events";
+const SettingsPath = "org.gnome.shell.extensions.dim-completed-calendar-events";
 
 const StylePastDaysSetting = "style-past-days";
 const StyleOngoingEventsSetting = "style-ongoing-events";
