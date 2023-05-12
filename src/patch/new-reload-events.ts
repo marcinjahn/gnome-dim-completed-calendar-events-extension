@@ -58,7 +58,7 @@ export function buildPatchedReloadEventsFunction(
 
 function isCompletedEvent(event: Event, shouldStylePastDays: boolean) {
   const isFinished = event.end < new Date();
-  log(Object.keys(event));
+
   if (shouldStylePastDays) {
     return isFinished;
   }
