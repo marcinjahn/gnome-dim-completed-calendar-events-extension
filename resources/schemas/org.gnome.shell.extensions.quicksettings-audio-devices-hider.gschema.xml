@@ -3,5 +3,13 @@
   <schema id="org.gnome.shell.extensions.mark-past-calendar-events" 
           path="/org/gnome/shell/extensions/mark-past-calendar-events/">
     <!-- See also: https://docs.gtk.org/glib/gvariant-format-strings.html -->
+    <key name="style-past-days" type="b">
+      <default>true</default>
+      <description>Decides whether the past days' events should also be styled as finished</description>
+    </key>
+    <key name="style-ongoing-events" type="b">
+      <default>true</default>
+      <description>Decides whether ongoing events should be highlighted</description>
+    </key>
   </schema>
 </schemalist>

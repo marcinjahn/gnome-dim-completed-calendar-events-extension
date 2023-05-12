@@ -1,4 +1,5 @@
-import { patchedReloadEvents } from "./new-reload-events";
+import { PatchConfiguration } from "./patch-configuration";
+import { buildPatchedReloadEventsFunction } from "./new-reload-events";
 
 export class EventsListPatcher {
   private originalFunction: () => void;
@@ -7,9 +8,10 @@ export class EventsListPatcher {
     this.originalFunction = this.getEventsItem()._reloadEvents;
   }
 
-  applyPatch() {
+  applyPatch(patchConfiguration: PatchConfiguration) {
     const eventsItem = this.getEventsItem();
-    eventsItem._reloadEvents = patchedReloadEvents.bind(eventsItem);
+    eventsItem._reloadEvents =
+      buildPatchedReloadEventsFunction(patchConfiguration).bind(eventsItem);
   }
 
   reversePatch() {
