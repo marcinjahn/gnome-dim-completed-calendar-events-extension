@@ -1,4 +1,4 @@
-# Dim Completed Calendar Events Gnome Extension
+# <img width="32px" src="./img/icon-128.webp" alt="project icon" /> Dim Completed Calendar Events Gnome Extension
 
 <a
 href="https://extensions.gnome.org/extension/5979/dim-completed-calendar-events/">
