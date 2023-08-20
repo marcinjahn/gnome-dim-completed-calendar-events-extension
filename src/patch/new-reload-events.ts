@@ -1,10 +1,11 @@
 // @ts-nocheck
+import St from "gi://St";
 
 import { PatchConfiguration } from "./patch-configuration";
 
 export function buildPatchedReloadEventsFunction(
   patchConfiguration: PatchConfiguration
-) {
+): () => void {
   return function newReloadEvents() {
     if (this._eventSource.isLoading || this._reloading) return;
 
@@ -15,13 +16,13 @@ export function buildPatchedReloadEventsFunction(
     const events = this._eventSource.getEvents(this._startDate, this._endDate);
 
     for (let event of events) {
-      const box = new imports.gi.St.BoxLayout({
+      const box = new St.BoxLayout({
         style_class: "event-box",
         vertical: true,
       });
 
       // MODIFICATIONS
-      const summaryLabel = new imports.gi.St.Label({
+      const summaryLabel = new St.Label({
         text: event.summary,
         style_class: "event-summary",
         style: isCompletedEvent(event, patchConfiguration.shouldStylePastEvents)
@@ -35,7 +36,7 @@ export function buildPatchedReloadEventsFunction(
       // END MODIFICATIONS
 
       box.add(
-        new imports.gi.St.Label({
+        new St.Label({
           text: this._formatEventTime(event),
           style_class: "event-time",
         })
@@ -44,7 +45,7 @@ export function buildPatchedReloadEventsFunction(
     }
 
     if (this._eventsList.get_n_children() === 0) {
-      const placeholder = new imports.gi.St.Label({
+      const placeholder = new St.Label({
         text: _("No Events"),
         style_class: "event-placeholder",
       });
@@ -73,6 +74,13 @@ function isCompletedEvent(event: Event, shouldStylePastDays: boolean) {
 function isOngoingEvent(event: Event, shouldStyleOngoingEvents: boolean) {
   const now = new Date();
 
+  log("isOngoingEvent");
+  log(now);
+  log(shouldStyleOngoingEvents);
+  log(event.start);
+  log(event.date);
+  log(event.end);
+
   return shouldStyleOngoingEvents && event.date <= now && now <= event.end;
 }
 
@@ -93,6 +101,6 @@ function getOngoingEventStyle() {
 }
 
 interface Event {
-  start: Date;
+  date: Date;
   end: Date;
 }

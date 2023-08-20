@@ -1,3 +1,5 @@
+import * as Main from "gnomejs://main.js";
+
 import { PatchConfiguration } from "./patch-configuration";
 import { buildPatchedReloadEventsFunction } from "./new-reload-events";
 
@@ -26,7 +28,7 @@ export class EventsListPatcher {
   }
 
   private getEventsItem() {
-    const dateMenu = imports.ui.main.panel.statusArea.dateMenu;
+    const dateMenu = Main.panel.statusArea.dateMenu;
 
     return dateMenu._eventsItem;
   }

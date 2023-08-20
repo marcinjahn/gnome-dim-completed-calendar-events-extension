@@ -1,87 +1,83 @@
-import {
-  PreferencesPage,
-  PreferencesGroup,
-  ActionRow,
-  PreferencesWindow,
-} from "@gi-types/adw1";
-import { Switch, Align } from "@gi-types/gtk4";
-import { SettingsManager } from "./settings-manager";
+import { ExtensionPreferences } from "gnomejs://prefs.js";
 
-function init() {}
+import Adw from "@gi-ts/adw1";
+import Gtk from "@gi-ts/gtk4";
 
-function fillPreferencesWindow(window: PreferencesWindow) {
-  const page = new PreferencesPage();
-  window.add(page);
+import { SettingsManager, SettingsPath } from "./settings-manager";
 
-  let settings = new SettingsManager();
+export default class Preferences extends ExtensionPreferences {
+  fillPreferencesWindow(window: Adw.PreferencesWindow) {
+    const page = new Adw.PreferencesPage();
+    window.add(page);
 
-  setupPastEventsSettings(page, settings);
-  setupOngoingEventsSettings(page, settings);
+    let settings = new SettingsManager(this.getSettings(SettingsPath));
+
+    this.setupPastEventsSettings(page, settings);
+    this.setupOngoingEventsSettings(page, settings);
+  }
+
+  setupPastEventsSettings(
+    page: Adw.PreferencesPage,
+    settings: SettingsManager
+  ) {
+    const group = new Adw.PreferencesGroup({
+      title: "Past Events",
+      description: "Settings related to events that are over",
+    });
+
+    const row = new Adw.ActionRow({
+      title: "Style events in past days as well",
+      subtitle:
+        "When viewing past days in the panel, the events will be greyed out",
+    });
+
+    const toggle = new Gtk.Switch({
+      active: settings.getShouldStylePastDays(),
+      valign: Gtk.Align.CENTER,
+    });
+
+    toggle.connect("state-set", (_, state) => {
+      settings.setShouldStylePastDays(state);
+
+      return false;
+    });
+
+    row.add_suffix(toggle);
+    row.activatable_widget = toggle;
+
+    group.add(row);
+    page.add(group);
+  }
+
+  setupOngoingEventsSettings(
+    page: Adw.PreferencesPage,
+    settings: SettingsManager
+  ) {
+    const group = new Adw.PreferencesGroup({
+      title: "Ongoing Events",
+      description: "Settings related to events that are ongoing",
+    });
+
+    const row = new Adw.ActionRow({
+      title: "Highlight ongoing events",
+      subtitle: "Will color events that are ongoing with system accent color",
+    });
+
+    const toggle = new Gtk.Switch({
+      active: settings.getShouldStylePastDays(),
+      valign: Gtk.Align.CENTER,
+    });
+
+    toggle.connect("state-set", (_, state) => {
+      settings.setShouldStyleOngoingEvents(state);
+
+      return false;
+    });
+
+    row.add_suffix(toggle);
+    row.activatable_widget = toggle;
+
+    group.add(row);
+    page.add(group);
+  }
 }
-
-function setupPastEventsSettings(
-  page: PreferencesPage,
-  settings: SettingsManager
-) {
-  const group = new PreferencesGroup({
-    title: "Past Events",
-    description: "Settings related to events that are over",
-  });
-
-  const row = new ActionRow({
-    title: "Style events in past days as well",
-    subtitle:
-      "When viewing past days in the panel, the events will be greyed out",
-  });
-
-  const toggle = new Switch({
-    active: settings.getShouldStylePastDays(),
-    valign: Align.CENTER,
-  });
-
-  toggle.connect("state-set", (_, state) => {
-    settings.setShouldStylePastDays(state);
-
-    return false;
-  });
-
-  row.add_suffix(toggle);
-  row.activatable_widget = toggle;
-
-  group.add(row);
-  page.add(group);
-}
-
-function setupOngoingEventsSettings(
-  page: PreferencesPage,
-  settings: SettingsManager
-) {
-  const group = new PreferencesGroup({
-    title: "Ongoing Events",
-    description: "Settings related to events that are ongoing",
-  });
-
-  const row = new ActionRow({
-    title: "Highlight ongoing events",
-    subtitle: "Will color events that are ongoing with system accent color",
-  });
-
-  const toggle = new Switch({
-    active: settings.getShouldStylePastDays(),
-    valign: Align.CENTER,
-  });
-
-  toggle.connect("state-set", (_, state) => {
-    settings.setShouldStyleOngoingEvents(state);
-
-    return false;
-  });
-
-  row.add_suffix(toggle);
-  row.activatable_widget = toggle;
-
-  group.add(row);
-  page.add(group);
-}
-
-export default { init, fillPreferencesWindow };

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { Settings } from "@gi-types/gio2";
-import { MixerControl } from "@gi-types/gvc1";
+import { Settings } from "@gi-ts/gio2";
+import { MixerControl } from "@gi-ts/gvc1";
 
 export {};
 
@@ -123,19 +123,19 @@ interface EasingParamsWithProperties
   extends EasingParams,
     Partial<Pick<any, AnimatableActorFields>> {}
 
-declare module "@gi-types/clutter10" {
+declare module "@gi-ts/clutter10" {
   interface Actor {
     ease(params: EasingParamsWithProperties): void;
   }
 }
 
-declare module "@gi-types/st1" {
+declare module "@gi-ts/st1" {
   interface Adjustment {
     ease(target: any, params: EasingParamsWithProperties): void;
   }
 }
 
-declare module "@gi-types/gobject2" {
+declare module "@gi-ts/gobject2" {
   export interface MetaInfo {
     GTypeName: string;
     GTypeFlags?: TypeFlags;
