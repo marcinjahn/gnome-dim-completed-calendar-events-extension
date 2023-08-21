@@ -74,13 +74,6 @@ function isCompletedEvent(event: Event, shouldStylePastDays: boolean) {
 function isOngoingEvent(event: Event, shouldStyleOngoingEvents: boolean) {
   const now = new Date();
 
-  log("isOngoingEvent");
-  log(now);
-  log(shouldStyleOngoingEvents);
-  log(event.start);
-  log(event.date);
-  log(event.end);
-
   return shouldStyleOngoingEvents && event.date <= now && now <= event.end;
 }
 

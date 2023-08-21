@@ -10,7 +10,7 @@ export default class DimCompletedCalendarEventsExtension extends Extension {
   private _settingsSubscription: number | null = null;
 
   enable() {
-    log(`Enabling extension ${this.uuid}`);
+    console.log(`Enabling extension ${this.uuid}`);
 
     this._settings = new SettingsManager(this.getSettings(SettingsPath));
 
@@ -23,7 +23,7 @@ export default class DimCompletedCalendarEventsExtension extends Extension {
   }
 
   disable() {
-    log(`Disabling extension ${this.uuid}`);
+    console.log(`Disabling extension ${this.uuid}`);
 
     this._patcher?.reversePatch();
     this._patcher = null;
