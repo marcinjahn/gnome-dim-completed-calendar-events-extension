@@ -3,6 +3,9 @@ import St from "gi://St";
 
 import { PatchConfiguration } from "./patch-configuration";
 
+/**
+ * Modified version of https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/main/js/ui/dateMenu.js
+ */
 export function buildPatchedReloadEventsFunction(
   patchConfiguration: PatchConfiguration
 ): () => void {
@@ -32,10 +35,10 @@ export function buildPatchedReloadEventsFunction(
           : null,
       });
 
-      box.add(summaryLabel);
+      box.add_child(summaryLabel);
       // END MODIFICATIONS
 
-      box.add(
+      box.add_child(
         new St.Label({
           text: this._formatEventTime(event),
           style_class: "event-time",
