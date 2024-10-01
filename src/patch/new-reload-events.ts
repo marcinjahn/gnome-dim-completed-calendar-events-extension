@@ -25,14 +25,30 @@ export function buildPatchedReloadEventsFunction(
       });
 
       // MODIFICATIONS
+      const styleAsCompleted = shouldBeStyledAsCompletedEvent(
+        event,
+        patchConfiguration.shouldStylePastDayEvents
+      );
+      const styleAsOngoing = shouldBeStyledAsOngoingEvent(
+        event,
+        patchConfiguration.shouldStyleOngoingEvents
+      );
+
+      if (styleAsCompleted && patchConfiguration.shouldHidePastEvents) {
+        continue;
+      }
+
+      let style = null;
+      if (styleAsCompleted) {
+        style = getCompletedEventStyle();
+      } else if (styleAsOngoing) {
+        style = getOngoingEventStyle();
+      }
+
       const summaryLabel = new St.Label({
         text: event.summary,
         style_class: "event-summary",
-        style: isCompletedEvent(event, patchConfiguration.shouldStylePastEvents)
-          ? getCompletedEventStyle()
-          : isOngoingEvent(event, patchConfiguration.shouldStyleOngoingEvents)
-          ? getOngoingEventStyle()
-          : null,
+        style: style,
       });
 
       box.add_child(summaryLabel);
@@ -60,7 +76,10 @@ export function buildPatchedReloadEventsFunction(
   };
 }
 
-function isCompletedEvent(event: Event, shouldStylePastDays: boolean) {
+function shouldBeStyledAsCompletedEvent(
+  event: Event,
+  shouldStylePastDays: boolean
+) {
   const isFinished = event.end < new Date();
 
   if (shouldStylePastDays) {
@@ -74,7 +93,10 @@ function isCompletedEvent(event: Event, shouldStylePastDays: boolean) {
   return isFinished && !startedInSomePastDay;
 }
 
-function isOngoingEvent(event: Event, shouldStyleOngoingEvents: boolean) {
+function shouldBeStyledAsOngoingEvent(
+  event: Event,
+  shouldStyleOngoingEvents: boolean
+) {
   const now = new Date();
 
   return shouldStyleOngoingEvents && event.date <= now && now <= event.end;

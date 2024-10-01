@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist>
-  <schema id="org.gnome.shell.extensions.dim-completed-calendar-events" 
+  <schema id="org.gnome.shell.extensions.dim-completed-calendar-events"
           path="/org/gnome/shell/extensions/dim-completed-calendar-events/">
     <!-- See also: https://docs.gtk.org/glib/gvariant-format-strings.html -->
     <key name="style-past-days" type="b">
@@ -10,6 +10,10 @@
     <key name="style-ongoing-events" type="b">
       <default>true</default>
       <description>Decides whether ongoing events should be highlighted</description>
+    </key>
+    <key name="hide-past-events" type="b">
+      <default>false</default>
+      <description>Decides whether past events should be hidden completely</description>
     </key>
   </schema>
 </schemalist>
