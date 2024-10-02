@@ -38,12 +38,11 @@ export function buildPatchedReloadEventsFunction(
         continue;
       }
 
-      let style = null;
-      if (styleAsCompleted) {
-        style = getCompletedEventStyle();
-      } else if (styleAsOngoing) {
-        style = getOngoingEventStyle();
-      }
+      const style = styleAsCompleted 
+        ? getCompletedEventStyle() 
+        : styleAsOngoing 
+          ? getOngoingEventStyle() 
+          : null;
 
       const summaryLabel = new St.Label({
         text: event.summary,
