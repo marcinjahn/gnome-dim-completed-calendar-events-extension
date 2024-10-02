@@ -1,13 +1,15 @@
 import { SettingsManager } from "settings-manager";
 
 export interface PatchConfiguration {
-  shouldStylePastEvents: boolean;
+  shouldStylePastDayEvents: boolean;
   shouldStyleOngoingEvents: boolean;
+  shouldHidePastEvents: boolean;
 }
 
 export function getPatchConfiguration(settings: SettingsManager) {
   return {
-    shouldStylePastEvents: settings.getShouldStylePastDays(),
+    shouldStylePastDayEvents: settings.getShouldStylePastDays(),
     shouldStyleOngoingEvents: settings.getShouldStyleOngoingEvents(),
+    shouldHidePastEvents: settings.getShouldHidePastEvents(),
   };
 }
