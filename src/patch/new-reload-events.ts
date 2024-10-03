@@ -38,11 +38,11 @@ export function buildPatchedReloadEventsFunction(
         continue;
       }
 
-      const style = styleAsCompleted 
-        ? getCompletedEventStyle() 
-        : styleAsOngoing 
-          ? getOngoingEventStyle() 
-          : null;
+      const style = styleAsCompleted
+        ? getCompletedEventStyle()
+        : styleAsOngoing
+        ? getOngoingEventStyle()
+        : null;
 
       const summaryLabel = new St.Label({
         text: event.summary,
@@ -114,7 +114,7 @@ function getCompletedEventStyle() {
 }
 
 function getOngoingEventStyle() {
-  return "color: #78aeed;"; // Gnome Accent Color
+  return "color: -st-accent-color"; // Gnome Accent Color
 }
 
 interface Event {
