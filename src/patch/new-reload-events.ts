@@ -114,7 +114,7 @@ function getCompletedEventStyle() {
 }
 
 function getOngoingEventStyle() {
-  return "color: -st-accent-color"; // Gnome Accent Color
+  return "color: st-lighten(-st-accent-color, 15%)"; // Gnome Accent Color
 }
 
 interface Event {
