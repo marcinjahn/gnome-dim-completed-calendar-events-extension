@@ -8,6 +8,7 @@ height="100" alt="Get it on GNOME Extensions"/> </a>
 
 A Gnome extension that styles calendar events in the top panel to
 make it clear which events are completed, ongoing, and upcoming.
+The onoging events are colored to match the accent color selected in the system (Gnome 47 and up).
 
 ![Example of how extension works](./img/example.png)
 
