@@ -100,8 +100,8 @@ function shouldBeStyledAsCompletedEvent(
   return isFinished && !startedInSomePastDay;
 }
 
-function gracePeriodExpired(event: Event, gracePeriod: number) {
-  const gracePeriodMs = gracePeriod * 60 * 1000;
+function isGracePeriodExpired(event: Event, gracePeriodInMinutes: number) {
+  const gracePeriodMs = gracePeriodInMinutes * 60 * 1000;
   return +event.end + gracePeriodMs < new Date();
 }
 
