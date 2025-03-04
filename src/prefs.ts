@@ -60,7 +60,7 @@ export default class Preferences extends ExtensionPreferences {
     rowHidePastEventsSetting.activatable_widget = toggleHidePastEvents;
 
     const rowHidePastEventsGracePeriodSetting = new Adw.ActionRow({
-      title: "Hide only if the event terminated more than N minutes ago",
+      title: "Delay hiding past events (minutes)",
       subtitle: "Useful to see events that are running late",
     });
     const gracePeriodAdjustment = new Gtk.Adjustment({
