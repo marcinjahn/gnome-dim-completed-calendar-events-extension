@@ -33,7 +33,7 @@ export function buildPatchedReloadEventsFunction(
         event,
         patchConfiguration.shouldStyleOngoingEvents
       );
-      const shouldHide = gracePeriodExpired(
+      const gracePeriodExpired = isGracePeriodExpired(
         event,
         patchConfiguration.gracePeriod
       );
