@@ -17,7 +17,7 @@
     </key>
     <key name="hide-past-events-grace-period" type="i">
       <default>0</default>
-      <description>Hide only if the event terminated more than N minutes ago</description>
+      <description>Delay hiding past events (minutes)</description>
     </key>
   </schema>
 </schemalist>
