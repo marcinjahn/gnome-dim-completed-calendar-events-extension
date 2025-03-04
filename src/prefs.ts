@@ -54,12 +54,38 @@ export default class Preferences extends ExtensionPreferences {
     });
     toggleHidePastEvents.connect("state-set", (_, state) => {
       settings.setShouldHidePastEvents(state);
+      rowHidePastEventsGracePeriodSetting.set_sensitive(state);
     });
     rowHidePastEventsSetting.add_suffix(toggleHidePastEvents);
     rowHidePastEventsSetting.activatable_widget = toggleHidePastEvents;
 
+    const rowHidePastEventsGracePeriodSetting = new Adw.ActionRow({
+      title: "Hide only if the event terminated more than N minutes ago",
+      subtitle: "Useful to see events that are running late",
+    });
+    const gracePeriodAdjustment = new Gtk.Adjustment({
+      lower: 0,
+      upper: 60,
+      step_increment: 1,
+      page_increment: 10,
+      value: settings.getHidePastEventsGracePeriod(),
+    });
+    const inputHidePastEventsGracePeriod = new Gtk.SpinButton({
+      adjustment: gracePeriodAdjustment,
+      valign: Gtk.Align.CENTER,
+    });
+    inputHidePastEventsGracePeriod.connect("value-changed", (self) => {
+      settings.setHidePastEventsGracePeriod(self.get_value());
+    });
+    rowHidePastEventsGracePeriodSetting.add_suffix(
+      inputHidePastEventsGracePeriod
+    );
+    rowHidePastEventsGracePeriodSetting.activatable_widget =
+      inputHidePastEventsGracePeriod;
+
     group.add(rowPastDaySetting);
     group.add(rowHidePastEventsSetting);
+    group.add(rowHidePastEventsGracePeriodSetting);
     page.add(group);
   }
 

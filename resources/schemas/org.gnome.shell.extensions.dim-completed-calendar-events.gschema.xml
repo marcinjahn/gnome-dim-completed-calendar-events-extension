@@ -15,5 +15,9 @@
       <default>false</default>
       <description>Decides whether past events should be hidden completely</description>
     </key>
+    <key name="hide-past-events-grace-period" type="i">
+      <default>0</default>
+      <description>Hide only if the event terminated more than N minutes ago</description>
+    </key>
   </schema>
 </schemalist>
