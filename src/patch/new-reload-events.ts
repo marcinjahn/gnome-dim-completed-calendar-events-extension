@@ -41,7 +41,7 @@ export function buildPatchedReloadEventsFunction(
       if (
         styleAsCompleted &&
         patchConfiguration.shouldHidePastEvents &&
-        shouldHide
+        gracePeriodExpired
       ) {
         continue;
       }
