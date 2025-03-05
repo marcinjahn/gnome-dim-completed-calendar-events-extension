@@ -33,8 +33,16 @@ export function buildPatchedReloadEventsFunction(
         event,
         patchConfiguration.shouldStyleOngoingEvents
       );
+      const gracePeriodExpired = isGracePeriodExpired(
+        event,
+        patchConfiguration.gracePeriod
+      );
 
-      if (styleAsCompleted && patchConfiguration.shouldHidePastEvents) {
+      if (
+        styleAsCompleted &&
+        patchConfiguration.shouldHidePastEvents &&
+        gracePeriodExpired
+      ) {
         continue;
       }
 
@@ -90,6 +98,11 @@ function shouldBeStyledAsCompletedEvent(
     new Date().setHours(0, 0, 0, 0);
 
   return isFinished && !startedInSomePastDay;
+}
+
+function isGracePeriodExpired(event: Event, gracePeriodInMinutes: number) {
+  const gracePeriodMs = gracePeriodInMinutes * 60 * 1000;
+  return +event.end + gracePeriodMs < new Date();
 }
 
 function shouldBeStyledAsOngoingEvent(

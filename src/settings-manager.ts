@@ -6,6 +6,7 @@ export const SettingsPath =
 const StylePastDaysSetting = "style-past-days";
 const StyleOngoingEventsSetting = "style-ongoing-events";
 const HidePastEventsSetting = "hide-past-events";
+const HidePastEventsGracePeriodSetting = "hide-past-events-grace-period";
 
 export class SettingsManager {
   private settings: Gio.Settings;
@@ -26,6 +27,10 @@ export class SettingsManager {
     return this.settings.get_boolean(HidePastEventsSetting);
   }
 
+  getHidePastEventsGracePeriod(): number {
+    return this.settings.get_int(HidePastEventsGracePeriodSetting);
+  }
+
   setShouldStylePastDays(value: boolean) {
     this.settings.set_boolean(StylePastDaysSetting, value);
   }
@@ -36,6 +41,10 @@ export class SettingsManager {
 
   setShouldHidePastEvents(value: boolean) {
     this.settings.set_boolean(HidePastEventsSetting, value);
+  }
+
+  setHidePastEventsGracePeriod(value: number) {
+    this.settings.set_int(HidePastEventsGracePeriodSetting, value);
   }
 
   connectToChanges(func: () => void): number {

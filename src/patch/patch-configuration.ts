@@ -4,6 +4,7 @@ export interface PatchConfiguration {
   shouldStylePastDayEvents: boolean;
   shouldStyleOngoingEvents: boolean;
   shouldHidePastEvents: boolean;
+  gracePeriod: number;
 }
 
 export function getPatchConfiguration(settings: SettingsManager) {
@@ -11,5 +12,6 @@ export function getPatchConfiguration(settings: SettingsManager) {
     shouldStylePastDayEvents: settings.getShouldStylePastDays(),
     shouldStyleOngoingEvents: settings.getShouldStyleOngoingEvents(),
     shouldHidePastEvents: settings.getShouldHidePastEvents(),
+    gracePeriod: settings.getHidePastEventsGracePeriod(),
   };
 }
