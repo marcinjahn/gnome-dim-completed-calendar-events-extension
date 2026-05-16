@@ -18,10 +18,10 @@ export function buildPatchedReloadEventsFunction(
 
     const events = this._eventSource.getEvents(this._startDate, this._endDate);
 
-    for (const event of events) {
+    for (let event of events) {
       const box = new St.BoxLayout({
         style_class: "event-box",
-        orientation: Clutter.Orientation.VERTICAL,
+        vertical: true,
       });
 
       // MODIFICATIONS
@@ -112,6 +112,14 @@ function shouldBeStyledAsOngoingEvent(
   const now = new Date();
 
   return shouldStyleOngoingEvents && event.date <= now && now <= event.end;
+}
+
+function isEventAllDay(event: Event) {
+  const now = new Date();
+  const dayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const dayEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+
+  return event.date === dayStart && event.end === dayEnd;
 }
 
 function getCompletedEventStyle() {
