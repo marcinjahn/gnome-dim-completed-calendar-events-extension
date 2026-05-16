@@ -114,14 +114,6 @@ function shouldBeStyledAsOngoingEvent(
   return shouldStyleOngoingEvents && event.date <= now && now <= event.end;
 }
 
-function isEventAllDay(event: Event) {
-  const now = new Date();
-  const dayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const dayEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
-
-  return event.date === dayStart && event.end === dayEnd;
-}
-
 function getCompletedEventStyle() {
   return "color: #9a9996"; // same grey as event time
 }
